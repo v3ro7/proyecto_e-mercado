@@ -17,3 +17,7 @@
         }, false)
       })
   })()
+
+  function redireccionar () {
+    window.location.href = "https://v3ro7.github.io/proyecto_e-mercado/portada.html";
+  }
