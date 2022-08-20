@@ -188,3 +188,11 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#loginImg {
+  width: 300px;
+}
+
+form.needs-validation {
+  text-align: center;
+}
