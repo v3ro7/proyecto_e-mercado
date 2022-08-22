@@ -16,8 +16,14 @@
           form.classList.add('was-validated')
         }, false)
       })
-  })()
+  })();
 
   function redireccionar () {
     window.location.href = "https://v3ro7.github.io/proyecto_e-mercado/portada.html";
-  }
+  };
+
+let boton = document.getElementById('ingresar');
+boton.addEventListener('click', function(){
+  let inputUsuario = document.getElementById('email').value;
+  localStorage.setItem("User", inputUsuario);
+});
