@@ -1,4 +1,5 @@
-const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+let idCategoria = localStorage.getItem('catID');
+const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${idCategoria}.json`;
 
 let categoriesArray = [];
 
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             categoriesArray = resultObj.data;
             showCategoriesList(categoriesArray.products);
+            document.getElementById('categoria').innerHTML = categoriesArray.catName;
         }
     });
 });
