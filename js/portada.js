@@ -13,5 +13,6 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 
+
 let linkUsuario = localStorage.getItem('User');
 document.getElementById('user').innerHTML = linkUsuario;

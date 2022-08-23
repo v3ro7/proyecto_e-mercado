@@ -1,6 +1,9 @@
 let idCategoria = localStorage.getItem('catID');
 const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${idCategoria}.json`;
 
+let linkUsuario = localStorage.getItem('User');
+document.getElementById('user').innerHTML = linkUsuario;
+
 let categoriesArray = [];
 
 function showCategoriesList(array){
