@@ -4,6 +4,75 @@ const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${idCat
 let linkUsuario = localStorage.getItem('User');
 document.getElementById('user').innerHTML = linkUsuario;
 
+let searchBar = document.getElementById('searchBar');
+let minimo = document.getElementById('rangeFilterCountMin');
+let maximo = document.getElementById('rangeFilterCountMax');
+let btnFiltrar = document.getElementById('rangeFilterCount');
+let btnLimpiar = document.getElementById('clearRangeFilter');
+let btnAsc = document.getElementById('sortAsc');
+let btnDesc = document.getElementById('sortDesc');
+let btnRel = document.getElementById('sortByCount');
+
+// Filtro barra de búsqueda
+function searchFilter() {
+    let result = categoriesArray.products;
+    if (searchBar.value != "") {
+        let filteredResult = result.filter(product => product.name.toLowerCase().includes(searchBar.value.toLowerCase()) || product.description.toLowerCase().includes(searchBar.value.toLowerCase()))
+        showCategoriesList(filteredResult);
+    }
+}
+searchBar.addEventListener('input', searchFilter);
+
+// Filtro precios
+function priceFilter() {
+    let result = categoriesArray.products;
+    if (minimo.value != "") {
+        showCategoriesList(result.filter(product => product.cost > minimo.value));
+    } else if (maximo.value != "") {
+        showCategoriesList(result.filter(product => product.cost < maximo.value));
+    }
+}
+btnFiltrar.addEventListener('click',priceFilter);
+
+// Deshacer filtro de precios
+function cleanPriceFilter() {
+    document.getElementById('rangeFilterCountMin').value = "";
+    document.getElementById('rangeFilterCountMax').value = "";
+    showCategoriesList(categoriesArray.products);
+}
+btnLimpiar.addEventListener('click',cleanPriceFilter);
+
+// Filtro precios por orden ascendente, descendente y relevancia
+function sortByPriceD(a,b) {
+    return a.cost - b.cost;
+}
+
+function sortByPriceA(a,b) {
+    return b.cost - a.cost;
+}
+
+function sortByRel(a,b) {
+    return b.soldCount - a.soldCount;
+}
+
+function priceAsc() {
+    showCategoriesList(categoriesArray.products.sort(sortByPriceD));
+}
+
+function priceDesc() {
+    showCategoriesList(categoriesArray.products.sort(sortByPriceA));
+}
+
+function productRel() {
+    showCategoriesList(categoriesArray.products.sort(sortByRel));
+}
+
+btnAsc.addEventListener('click', priceDesc);
+btnDesc.addEventListener('click', priceAsc);
+btnRel.addEventListener('click', productRel);
+
+
+
 let categoriesArray = [];
 
 function showCategoriesList(array){
