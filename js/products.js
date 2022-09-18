@@ -71,6 +71,11 @@ btnAsc.addEventListener('click', priceDesc);
 btnDesc.addEventListener('click', priceAsc);
 btnRel.addEventListener('click', productRel);
 
+//función para guardar id de un producto en local storage al cliquearlo y redirigir a la página de info del mismo
+function setProductID(id){
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
+}
 
 
 let categoriesArray = [];
@@ -81,7 +86,7 @@ function showCategoriesList(array){
     for(let i = 0; i < array.length; i++){ 
         let category = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProductID(${category.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + category.image + `" alt="product image" class="img-thumbnail">

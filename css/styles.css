@@ -192,3 +192,25 @@ a.custom-card:hover {
 form.needs-validation {
   text-align: center;
 }
+
+#images {
+  display: flex;
+
+}
+
+#images img {
+  width: 25%;
+  margin: 0 5px;
+}
+
+#product-info p, #product-comment p {
+  margin: 0;
+}
+
+#textComment {
+  width: 50%;
+}
+
+#myScore {
+  width: 170px;
+}
