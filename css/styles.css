@@ -214,3 +214,20 @@ form.needs-validation {
 #myScore {
   width: 170px;
 }
+
+#related-images img {
+ width: 100%;
+}
+
+#related-images div {
+  width: 25%;
+  margin: 0 5px;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  border-radius: 5px;
+}
