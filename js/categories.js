@@ -6,9 +6,6 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-let linkUsuario = localStorage.getItem('User');
-document.getElementById('user').innerHTML = linkUsuario;
-
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)

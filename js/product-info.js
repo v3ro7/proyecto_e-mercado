@@ -1,10 +1,14 @@
-let linkUsuario = localStorage.getItem('User');
-document.getElementById('user').innerHTML = linkUsuario;
 let divProductInfo = document.getElementById('product-info');
 let divRelatedProducts = document.getElementById('related-products');
 let divProductComment = document.getElementById('product-comment');
 let divNewComment = document.getElementById('newComment');
 let btnComment = document.getElementById('btnComment');
+
+//función para regresar a products.html
+function volverAlListado() {
+    window.location = "products.html";
+}
+
 
 // re utilizo función para guardar un id de producto
 function setProductID(id){
@@ -17,31 +21,6 @@ let idProducto = localStorage.getItem('productID');
 const PRODUCT_URL = `https://japceibal.github.io/emercado-api/products/${idProducto}.json`;
 const COMMENT_URL = `https://japceibal.github.io/emercado-api/products_comments/${idProducto}.json`;
 
-
-
-//función para iterar por las imagenes y mostrarlas
-// function showImages(arrImg) {
-//     let imagesToAppend = "";
-//     for (let i=0; i<arrImg.length; i++) {
-//         imagesToAppend += `
-//         <div class="carousel-item mt-2">
-//             <img class="d-block w-50 border p-1" src="${arrImg[i]}">
-//         </div>
-//         `;
-//     }
-//     document.getElementById('images').innerHTML = imagesToAppend;
-// }
-
-
-// función para agregar clase active al primer div del carrusel
-function setActiveClass() {
-    let arrOfItems = document.getElementsByClassName('carousel-item');
-    let array = [];
-    for (let i=0; i<arrOfItems.length; i++) {
-        array.push(arrOfItems[i])
-    }
-    console.log(array)
-}
 
 // función para iterar por el array de productos relacionados y mostrarlos
 function showRelated(arr) {
@@ -86,6 +65,7 @@ function showComments(arrComments) {
     divProductComment.innerHTML = commentsToAppend;
 }
 
+let actualProduct = {}
 let relatedProductsArr = [];
 // trae y muestra info del producto una vez que la página haya cargado
 document.addEventListener('DOMContentLoaded', function() {
@@ -94,12 +74,20 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         images = data.images;
-        console.log(images.length)
         relatedProductsArr = data.relatedProducts;
-
+        
+        actualProduct.image = images[0];
+        actualProduct.name = data.name;
+        actualProduct.currency = data.currency;
+        actualProduct.cost = data.cost;
+        
         divProductInfo.innerHTML = `
-        <h2 class="mt-4 mb-5">${data.name}</h2>
+        <div class="position-relative">
+        <button onclick="addToCart()" class="btn btn-success position-absolute end-0" style="margin-right: 150px; margin-top: 20px;">Comprar</button>
+        </div>
+        <h2 class="mt-5 mb-5">${data.name}</h2>
         <hr>
+        <a href="products.html" class="float-end text-reset text-decoration-none cursor-active" style="margin-right: 135px;"><span class="fa fa-arrow-left"></span> Volver al listado</a>
         <p><strong>Precio</strong></p>
         <p>${data.currency} ${data.cost}</p>
         <br>
@@ -148,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="d-flex" id="related-images">
         </div>
         `;
-        // setActiveClass();
-        // showImages(images);
         showRelated(relatedProductsArr);
     });
 
@@ -162,6 +148,19 @@ document.addEventListener('DOMContentLoaded', function() {
         showComments(comments);
     })
 })
+
+
+//función para agregar al carrito el producto actual
+function addToCart(){
+    if (localStorage.getItem('cartItems')) {
+        let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+        cartItems.push(actualProduct);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    } else {
+        localStorage.setItem('cartItems', JSON.stringify([actualProduct]));
+    }
+    window.location = "cart.html";
+}
 
 
 // función para añadir un comentario

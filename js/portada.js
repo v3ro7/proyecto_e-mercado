@@ -12,7 +12,3 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
-
-
-let linkUsuario = localStorage.getItem('User');
-document.getElementById('user').innerHTML = linkUsuario;
