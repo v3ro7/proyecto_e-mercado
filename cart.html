@@ -58,6 +58,7 @@
                       <th>Costo</th>
                       <th>Cantidad</th>
                       <th>Subtotal</th>
+                      <th></th>
                   </tr>
               </thead>
               <tbody id="tb">
@@ -70,24 +71,24 @@
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div> -->
       
-      <div class="col-9 mx-auto">
+      <div class="col-9 mx-auto" id="tipoDeEnvio">
         <hr class="mb-4">
         <h3 class="mb-4">Tipo de envío</h3>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="premium">
+          <label class="form-check-label" for="premium">
             Premium 2 a 5 días (15%)
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="express">
+          <label class="form-check-label" for="express">
             Express 5 a 8 días (7%)
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="standard">
+          <label class="form-check-label" for="standard">
             Standard 12 a 15 días (5%)
           </label>
         </div>
@@ -97,26 +98,118 @@
         <div class="input-group mb-3">
           <div class="col-6 mb-3">
             <label for="calle" class="form-label">Calle</label>
-            <input type="text" class="form-control" id="calle">
+            <input type="text" class="form-control address" id="calle" required>
           </div>
           
           <div class="col-4 mb-3 ms-4">
             <label for="numero" class="form-label">Número</label>
-            <input type="text" class="form-control" id="numero">
+            <input type="text" class="form-control address" id="numero" required>
           </div>
           
           <div class="col-6 mb-3">
             <label for="esquina" class="form-label">Esquina</label>
-            <input type="text" class="form-control" id="esquina">
+            <input type="text" class="form-control address" id="esquina" required>
           </div>
           
         </div>
         <hr>
       </div>
 
+      <div class="col-9 mx-auto">
+        <h3 class="my-4">Costos</h3>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between">
+            <p>Subtotal<br>
+              <small>Costo unitario del producto por cantidad</small>
+            </p>
+            <span id="subTotal">USD</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <p>Costo de envío<br>
+              <small>Según el tipo de envío</small>
+            </p>
+            <span id="cEnvio">USD</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <p>Total ($)</p>
+            <span class="fw-bold" id="total">USD</span>
+          </li>
+        </ul>
+        <br>
+        <hr>
+      </div>
+      <div class="col-9 mx-auto">
+        <h3 class="my-4">Forma de pago</h3>
+        <p class="d-inline me-2" id="seleccion">No ha seleccionado</p>
+        <a type="button" data-bs-toggle="modal" data-bs-target="#formaDePago" href="#">Seleccionar</a>
+
+        <div class="modal fade" id="formaDePago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="exampleModalLabel">Forma de pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body m-2" id="opciones">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="creditCard">
+                  <label class="form-check-label" for="creditCard">
+                    Tarjeta de crédito
+                  </label>
+                </div>
+                <hr>
+                <form>
+                  <div class="input-group">
+                    <div class="col-6 mb-3">
+                      <label for="cardNumber" class="col-form-label">Número de tarjeta</label>
+                      <input type="text" class="form-control" id="cardNumber">
+                    </div>
+                    <div class="col-3 mb-3 ms-3">
+                      <label for="secCode" class="col-form-label">Código de seg.</label>
+                      <input type="text" class="form-control" id="secCode">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="dateOfExp" class="col-form-label">Vencimiento (MM/AA)</label>
+                      <input type="text" class="form-control" id="dateOfExp">
+                    </div>
+                  </div>
+                </form>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="bankT">
+                  <label class="form-check-label" for="bankT">
+                    Transferencia bancaria
+                  </label>
+                </div>
+                <hr>
+                <form>
+                  <div class="col-6 mb-3">
+                    <label for="account-name" class="col-form-label">Número de cuenta</label>
+                    <input type="text" class="form-control" id="account-name">
+                  </div>
+                </form>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 mx-auto mt-5">
+        <button type="button" id="finalizarCompra" class="btn btn-primary w-100">Finalizar compra</button>
+      </div>
+
+      <div id="success"></div>
+      
+      <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+        ¡Has comprado con éxito!
+        <button id="close" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
     </div>
   </main>
-  <footer class="text-muted">
+  <footer class="text-muted mt-5">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>

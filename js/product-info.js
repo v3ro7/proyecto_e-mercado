@@ -76,10 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
         images = data.images;
         relatedProductsArr = data.relatedProducts;
         
+        actualProduct.id = data.id;
         actualProduct.image = images[0];
         actualProduct.name = data.name;
         actualProduct.currency = data.currency;
         actualProduct.cost = data.cost;
+        console.log(actualProduct)
         
         divProductInfo.innerHTML = `
         <div class="position-relative">
