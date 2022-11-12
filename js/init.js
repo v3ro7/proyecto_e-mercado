@@ -8,7 +8,14 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
 (function () {
-  document.getElementById('user').innerHTML = localStorage.getItem('User');
+  if (localStorage.getItem('User') === null) {
+    document.getElementById('noLogin').innerHTML = `<span style="color:#ffffff8c;"><a href="index.html" class="nav-link cursor-active">Iniciar Sesión</a></span>`;
+    document.getElementById('profile').setAttribute('href', '#');
+  } else {
+    document.getElementById('user').innerHTML = localStorage.getItem('User');
+    document.getElementById('profile').setAttribute('href', 'my-profile.html');
+  }
+  
 })();
 
 let showSpinner = function(){

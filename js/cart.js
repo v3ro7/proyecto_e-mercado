@@ -197,6 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
             showCart();
         }
 
+        if (localStorage.getItem('User') === null) {
+            console.log("Usuario no logueado")
+        }
+        
         sumCosts();
         modalOptions();
         validar();
